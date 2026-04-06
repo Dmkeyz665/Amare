@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>730 Days of Amare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0a08;
+    --cream: #fdf6ee;
+    --gold: #c9954a;
+    --gold-light: #e8c07a;
+    --blush: #e8d5c4;
+    --rust: #7a3b1e;
+    --warm-dark: #1a120b;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 24px 80px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,149,74,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(122,59,30,0.22) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 90%, rgba(201,149,74,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .ornament {
+    font-family: var(--serif);
+    font-size: 18px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  .hero-number {
+    font-family: var(--serif);
+    font-size: clamp(96px, 18vw, 200px);
+    font-weight: 300;
+    line-height: 0.9;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--gold-light);
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+    position: relative;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(28px, 6vw, 58px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--cream);
+    letter-spacing: 0.04em;
+    margin-top: 12px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.75s;
+  }
+
+  .hero-days-label {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1s;
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 40px auto 0;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.2s;
+  }
+
+  /* ── HOOK SECTION ── */
+  .section {
+    padding: 100px 24px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 32px;
+  }
+
+  .hook-text {
+    font-family: var(--serif);
+    font-size: clamp(26px, 4.5vw, 46px);
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--cream);
+  }
+
+  .hook-text em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  /* ── BODY COPY ── */
+  .copy-block {
+    padding: 0 24px 100px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .copy-block p {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.2vw, 21px);
+    font-weight: 300;
+    line-height: 1.75;
+    color: #d4c0ae;
+    margin-bottom: 28px;
+  }
+
+  .copy-block p strong {
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .pull-quote {
+    border-left: 1px solid var(--gold);
+    padding: 24px 32px;
+    margin: 52px 0;
+    background: rgba(201,149,74,0.05);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif) !important;
+    font-style: italic;
+    font-size: clamp(20px, 3vw, 28px) !important;
+    color: var(--cream) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+  }
+
+  /* ── PHOTO GRID ── */
+  .gallery-section {
+    padding: 80px 24px;
+    background: var(--warm-dark);
+  }
+
+  .gallery-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .gallery-header h2 {
+    font-family: var(--serif);
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--cream);
+  }
+
+  .gallery-header p {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 12px;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 12px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .photo-slot {
+    background: #1e1410;
+    border: 1px solid rgba(201,149,74,0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .photo-slot:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .photo-slot::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(232,208,156,0.6);
+  }
+
+  .photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 200px;
+  }
+
+  .photo-placeholder input[type="file"] {
+    display: none;
+  }
+
+  .photo-placeholder label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    min-height: 200px;
+    gap: 10px;
+  }
+
+  .photo-placeholder label:hover .upload-icon { opacity: 1; }
+
+  .upload-icon {
+    opacity: 0.35;
+    transition: opacity 0.25s;
+  }
+
+  .upload-icon svg { width: 28px; height: 28px; fill: none; stroke: var(--gold); stroke-width: 1.5; }
+
+  .upload-hint {
+    font-family: var(--sans);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(201,149,74,0.4);
+  }
+
+  .photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  /* Grid Layout — varied sizes */
+  .slot-1  { grid-column: span 7; grid-row: span 2; min-height: 320px; }
+  .slot-2  { grid-column: span 5; min-height: 160px; }
+  .slot-3  { grid-column: span 5; min-height: 160px; }
+  .slot-4  { grid-column: span 4; min-height: 180px; }
+  .slot-5  { grid-column: span 4; min-height: 180px; }
+  .slot-6  { grid-column: span 4; min-height: 180px; }
+  .slot-7  { grid-column: span 5; min-height: 200px; }
+  .slot-8  { grid-column: span 7; grid-row: span 2; min-height: 280px; }
+  .slot-9  { grid-column: span 5; min-height: 140px; }
+  .slot-10 { grid-column: span 5; min-height: 140px; }
+
+  /* ── CLOSING SECTION ── */
+  .closing {
+    padding: 120px 24px;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  .closing-ife {
+    font-family: var(--serif);
+    font-size: clamp(48px, 10vw, 100px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 32px;
+    opacity: 0.8;
+  }
+
+  .closing p {
+    font-family: var(--serif);
+    font-size: clamp(17px, 2.2vw, 22px);
+    font-weight: 300;
+    line-height: 1.75;
+    color: #c4ab96;
+  }
+
+  .closing p em {
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .signature {
+    margin-top: 64px;
+    font-family: var(--serif);
+    font-size: clamp(15px, 2vw, 18px);
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-ornament {
+    font-family: var(--serif);
+    font-size: 24px;
+    color: rgba(201,149,74,0.4);
+    text-align: center;
+    padding: 40px 0 60px;
+    letter-spacing: 0.3em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .slot-1  { grid-column: span 12; min-height: 200px; }
+    .slot-2  { grid-column: span 12; min-height: 180px; }
+    .slot-3  { grid-column: span 6; min-height: 150px; }
+    .slot-4  { grid-column: span 6; min-height: 150px; }
+    .slot-5  { grid-column: span 6; min-height: 150px; }
+    .slot-6  { grid-column: span 6; min-height: 150px; }
+    .slot-7  { grid-column: span 12; min-height: 180px; }
+    .slot-8  { grid-column: span 12; min-height: 180px; grid-row: span 1; }
+    .slot-9  { grid-column: span 6; min-height: 130px; }
+    .slot-10 { grid-column: span 6; min-height: 130px; }
+  }
+</style>
+</head>
+<body>
+
+  <p id="hint" style="text-align:center; color:white; margin-top:50px;">
+   Tap anywhere ❤️
+  </p> 
+
+
+<!-- HERO -->
+<section class="hero">
+  <p class="ornament">A love letter in numbers</p>
+  <h1 class="hero-number">730</h1>
+  <p class="hero-title">Days of Amare</p>
+  <p class="hero-days-label">Two years. One person. No going back.</p>
+  <div class="hero-divider"></div>
+</section>
+
+<!-- HOOK -->
+<section class="section reveal">
+  <p class="section-label">The Beginning</p>
+  <h2 class="hook-text">Two years ago this April, <em>my life got a serious upgrade.</em></h2>
+</section>
+
+<!-- BODY COPY -->
+<div class="copy-block reveal">
+  <p>I call you <strong>Ife</strong> because you are love personified. In the last twenty-four months, you've become my greatest blessing and my favorite person.</p>
+
+  <div class="pull-quote">
+    <p>"We've had the laughs, the growth, and the 'stubborn' days — but through it all, my heart has only grown more certain of one thing."</p>
+  </div>
+
+  <p>I cherish you more than words on a screen could ever say.</p>
+</div>
+
+<!-- PHOTO GALLERY -->
+<section class="gallery-section">
+  <div class="gallery-header reveal">
+    <h2>Our Chapters</h2>
+    <p>Moments that made us</p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <div class="photo-slot slot-1" data-label="Memory 01">
+      <img src="images/IMG-20260217-WA0104.jpg" alt="Memory 01">
+    </div>
+
+    <div class="photo-slot slot-2" data-label="Memory 02">
+      <img src="images/IMG-20250810-WA0080.jpg" alt="Memory 02">
+    </div>
+
+    <div class="photo-slot slot-3" data-label="Memory 03">
+      <img src="images/motion_photo_3149116537579283131.jpg" alt="Memory 03">
+    </div>
+
+    <div class="photo-slot slot-4" data-label="Memory 04">
+      <img src="images/IMG-20260118-WA0097.jpg" alt="Memory 04">
+    </div>
+
+    <div class="photo-slot slot-5" data-label="Memory 05">
+      <img src="images/IMG-20240914-WA0076(1).jpg" alt="Memory 05">
+    </div>
+
+    <div class="photo-slot slot-6" data-label="Memory 06">
+      <img src="images/IMG-20250727-WA0077.jpg" alt="Memory 06">
+    </div>
+
+    <div class="photo-slot slot-7" data-label="Memory 07">
+      <img src="images/motion_photo_3149116537579283131.jpg" alt="Memory 07">
+    </div>
+
+    <div class="photo-slot slot-8" data-label="Memory 08">
+       <img src="images/IMG-20250810-WA0082.jpg" alt="Memory 08">
+    </div>
+
+    <div class="photo-slot slot-9" data-label="Memory 09">
+      <img src="images/IMG-20240811-WA0098.jpg" alt="Memory 0">
+    </div>
+
+    <div class="photo-slot slot-10" data-label="Memory 10">
+      <img src="images/IMG-20260401-WA0001.jpg" alt="Memory 0">
+    </div>
+
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing reveal">
+  <div class="closing-ife">Ife</div>
+  <p>In Yoruba, <em>ife</em> means love. And that's exactly what you are — not just a feeling I have, but the truest description of who you are to me.</p>
+  <p style="margin-top: 24px;">Here's to every day after 730. Here's to you.</p>
+  <div class="signature">— Your person, always.</div>
+</section>
+
+<div class="footer-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+
+<script>
+  function loadImage(input) {
+    if (!input.files || !input.files[0]) return;
+    const slot = input.closest('.photo-slot');
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const placeholder = slot.querySelector('.photo-placeholder');
+      placeholder.style.display = 'none';
+      const img = document.createElement('img');
+      img.src = e.target.result;
+      slot.appendChild(img);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.12 }
+  );
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+<audio id="bg-music" loop>
+  <source src="images/Perfect-(Mr-Jat.in).mp3" type="audio/mpeg">
+</audio>
+
+audio {
+  display: none;
+}
+
+<script>
+  const music = document.getElementById("bg-music");
+  const hint = document.getElementById("hint");
+
+  music.volume = 0;
+
+  function fadeIn() {
+    let vol = 0;
+    const interval = setInterval(() => {
+      if (vol < 1) {
+        vol += 0.05;
+        music.volume = vol;
+      } else {
+        clearInterval(interval);
+      }
+    }, 200);
+  }
+
+  document.addEventListener("click", () => {
+    music.play().then(() => {
+      fadeIn();
+      if (hint) hint.style.display = "none";
+    });
+  });
+</script>
+
+</body>
+</html>
